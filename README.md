@@ -1,4 +1,4 @@
-# Meteorolgical faker
+# Meteorological faker
 
 [![Preview](./banner.png)][1]
 [![MIT License][2]][1] [![Python][3]][1] [![HTML5][4]][1] [![CSS3][5]][1] [![JS][6]][1]
