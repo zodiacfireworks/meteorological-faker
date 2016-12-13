@@ -32,6 +32,8 @@ to show how to build a little server with Flask, or anything you want.
 
     This will bring you real data from CONIDA (Comisión Nacional de Desarrollo Investigación Aeroespacial - Peru). In this mode data is renwed every 5 minutes.
 
+4. Go to your web browser, enter to `127.0.0.1:5000`, and enjoy :smile:
+
 ## Authors
 
 * [@zodiacfireworks](https://github.com/zodiacfireworks)

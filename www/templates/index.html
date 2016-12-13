@@ -1,44 +1,183 @@
+<!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
-<head>
-    <meta charset="utf-8">
-</head>
+        <title>Meteorological faker</title>
 
-<body>
-    <div>HOLA</div>
-    <div id="table">
-    </div>
-    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
-    <script>
-    (function() {
-        // Use a named immediately-invoked function expression.
-        function worker() {
-            $.ajax('http://127.0.0.1:5000/api/')
-                .fail(function(response) {
-                    // This part is used if this ajax request fails
-                    console.log('fail');
-                    console.log(response);
-                    worker();
-                })
-                .done(function(response) {
-                    // This part is used if this ajax request success
-                    console.log('success');
-                    console.log(response);
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700&amp;subset=latin-ext" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+        <style type="text/css" media="screen">
+            *:focus, *:active {
+                outline: none;
+            }
 
-                    $('#table').html($('#table').html() + JSON.stringify(response) + '<br>');
+            html, body {
+                height:100%;
+                width: 100%;
+            }
 
-                    setTimeout(worker, 60000);
-                })
-                .always(function (response) {
+            .thin {
+                font-weight: 100;
+            }
 
-                });
-        };
+            .light {
+                font-weight: 300;
+            }
 
-        window.addEventListener('load', function() {
-            worker();
-        })
-    })();
-    </script>
-</body>
+            .normal {
+                font-weight: 400;
+            }
 
+            .bold {
+                font-weight: 700;
+            }
+
+            .page-content {
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
+            }
+
+            .page-content main {
+                flex: 1 0 auto;
+            }
+
+            #logger {
+                height: 150px;
+                padding: 0.5rem;
+            }
+
+            #table td {
+                text-align: right
+            }
+
+            .switch label input[type=checkbox]:checked+.lever {
+                background-color: #82b1ff;
+            }
+
+            .switch label input[type=checkbox]:checked+.lever:after {
+                background-color: #0d47a1;
+            }
+        </style>
+    </head>
+    <body class="page-wrapper light dark-text">
+        <div class="page-content">
+            <header>
+                <nav class="blue darken-1">
+                    <div class="nav-wrapper container">
+                        <span class="brand-logo left grey-text text-lighten-5 light">Meteorlogical Faker</span>
+                    </div>
+                </nav>
+            </header>
+
+            <main>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12">
+                            <h4 class="thin">Logger</h4>
+                            <div class="divider"></div>
+                            <pre id="logger" class="grey lighten-3">
+                            </pre>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <h4 class="thin">Data table</h4>
+
+                            <table id="table" class="striped responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th data-field="date">Date</th>
+                                        <th data-field="time">Time</th>
+                                        <th data-field="temperature">Temperature [°C]</th>
+                                        <th data-field="humidity">Humidity [%]</th>
+                                        <th data-field="dew_point">Dew Point [°C]</th>
+                                        <th data-field="pressure">Pressure [mmHg]</th>
+                                        <th data-field="uv_index">UV Index</th>
+                                        <th data-field="solar_radiation">Solar Radiation [W/m<sup>2</sup>]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="page-footer grey darken-4">
+                <div class="footer-copyright">
+                    <div class="container center-align">
+                        Made with <i class="fa fa-fw fa-heart red-text"></i> by
+                        <a class="blue-text text-accent-3" target="_blank" href="https://github.com/zodiacfireworks">@zodiacfireworks</a> and
+                        <a class="blue-text text-accent-3" target="_blank" href="https://github.com/sheylabre">@sheylabre</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+        <script>
+        (function() {
+            var last_check = "";
+            var current_check = "";
+            var html_template = "" +
+                "<tr>" +
+                    "<td>:date:</td>" +
+                    "<td>:time:</td>" +
+                    "<td>:temperature:</td>" +
+                    "<td>:humidity:</td>" +
+                    "<td>:dew_point:</td>" +
+                    "<td>:pressure:</td>" +
+                    "<td>:uv_index:</td>" +
+                    "<td>:solar_radiation:</td>" +
+                "</tr>";
+
+            // Use a named immediately-invoked function expression.
+            function worker() {
+                $.ajax('http://127.0.0.1:5000/api/')
+                    .fail(function(response) {
+                        // This part is used if this ajax request fails
+                        // call the worker every seccond
+                        setTimeout(worker, 1000);
+                    })
+                    .done(function(response) {
+                        // Call the worker every minute
+                        setTimeout(worker, 60000);
+
+                        // verify data redundance,
+                        // if the time stam of the data is the same since the last call then it isn't
+                        // published
+                        current_check = [response["data"]["date"], response["data"]["time"]].join("T");
+
+                        if( current_check != last_check ){
+                            var html = html_template
+                                .replace(":date:", response["data"]["date"])
+                                .replace(":time:", response["data"]["time"])
+                                .replace(":temperature:", response["data"]["temperature"])
+                                .replace(":humidity:", response["data"]["humidity"])
+                                .replace(":dew_point:", response["data"]["dew_point"])
+                                .replace(":pressure:", response["data"]["pressure"])
+                                .replace(":uv_index:", response["data"]["uv_index"])
+                                .replace(":solar_radiation:", response["data"]["solar_radiation"]);
+
+                            $('#logger').text(JSON.stringify(response) + '\n' + $('#logger').text());
+                            $('#table tbody').prepend($(html));
+
+                            last_check = current_check
+                        }
+                    })
+            };
+
+            window.addEventListener('load', function() {
+                worker();
+            })
+        })();
+        </script>
+    </body>
 </html>

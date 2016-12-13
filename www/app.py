@@ -24,15 +24,15 @@ def api():
     global current_check
     global response_data
 
-    current_check = datetime.now().strftime("%Y%m%dT%H%M")
+    if faker == True:
+        current_check = datetime.now().strftime("%Y/%m/%d %H:%M")
 
-    if current_check != last_check:
-        if faker == True:
+        if current_check != last_check:
             response_data = {
                 "success": True,
                 "data": {
-                    'date': current_check.split("T")[0],
-                    'time': current_check.split("T")[1],
+                    'date': current_check.split(" ")[0],
+                    'time': current_check.split(" ")[1],
                     'temperature': float("{0:.2f}".format(25 + 4*(0.5 - random.random()))),
                     'humidity': float("{0:.2f}".format(75 + 10*(0.5 - random.random()))),
                     'dew_point': float("{0:.2f}".format(15 + 4*(0.5 - random.random()))),
@@ -41,10 +41,11 @@ def api():
                     'solar_radiation': float("{0:.2f}".format(100 + 20*(0.5 - random.random()))),
                 }
             }
-        else:
-            response_data = meteorological_collector()
 
-        last_check = current_check
+            last_check = current_check
+
+    else:
+        response_data = meteorological_collector()
 
     response = Response(
         response=json.dumps(
