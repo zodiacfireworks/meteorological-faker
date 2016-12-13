@@ -124,8 +124,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
         <script>
         (function() {
+            // check varaibles to verify time repeatd data
             var last_check = "";
             var current_check = "";
+
+            // HTML to fill talbe body
             var html_template = "" +
                 "<tr>" +
                     "<td>:date:</td>" +
@@ -155,6 +158,7 @@
                         // published
                         current_check = [response["data"]["date"], response["data"]["time"]].join("T");
 
+                        // if we have new data we need to publish it
                         if( current_check != last_check ){
                             var html = html_template
                                 .replace(":date:", response["data"]["date"])

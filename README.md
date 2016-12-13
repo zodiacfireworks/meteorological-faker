@@ -1,10 +1,13 @@
 # Meteorolgical faker
 
+[![Preview](./banner.png)][1]
 [![MIT License][2]][1] [![Python][3]][1] [![HTML5][4]][1] [![CSS3][5]][1] [![JS][6]][1]
 
 A little server built in flask which provides fake (or real) meteorlogical data.
+
 This server was built to show how API and AJAX request works, also can be used
 to show how to build a little server with Flask, or anything you want.
+
 
 ## How to use
 
