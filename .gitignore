@@ -1,0 +1,6 @@
+# Directory patterns
+__pycache__
+
+# File patterns
+.stfolder
+*.pyc
