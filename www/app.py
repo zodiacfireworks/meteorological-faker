@@ -81,6 +81,6 @@ if __name__ == "__main__":
         elif sys.argv[1] == "fake":
             faker = True
         else:
-            raise("Unknown flag {0}".format(sys.argv[1]))
+            raise(Exception("Unknown flag {0}".format(sys.argv[1])))
 
     app.run(host='0.0.0.0')

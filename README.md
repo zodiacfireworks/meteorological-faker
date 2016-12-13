@@ -8,6 +8,30 @@ to show how to build a little server with Flask, or anything you want.
 
 ## How to use
 
+1. Clone the repository
+    ```
+    git clone https://github.com/zodiacfireworks/meteorological-faker.git
+    ```
+
+2. Enter to the repository folder and install requeriments
+    ```
+    cd meteorological-faker
+    pip install -r requeriments.py
+    ```
+
+3. Enter to `www` directory and run the server
+    ```
+    cd ./www
+    python app.py
+    ```
+
+    If you want to use have real data, run
+    ```
+    python app.py no-fake
+    ```
+
+    This will bring you real data from CONIDA (Comisión Nacional de Desarrollo Investigación Aeroespacial - Peru). In this mode data is renwed every 5 minutes.
+
 ## Authors
 
 * [@zodiacfireworks](https://github.com/zodiacfireworks)
