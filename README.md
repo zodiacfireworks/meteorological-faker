@@ -1,12 +1,11 @@
 # Meteorological faker
 
 [![Preview](./banner.png)][1]
-[![MIT License][2]][1] [![Python][3]][1] [![HTML5][4]][1] [![CSS3][5]][1] [![JS][6]][1]
+[![MIT License][2]][1] [![Python][3]][1] [![HTML5][4]][1] [![CSS3][5]][1] [![JS][6]][1] [![AJAX][7]][1] [![API][8]][1] [![Meteorology][9]][1]
 
 A little server built in flask which provides fake (or real) meteorlogical data.
 
-This server was built to show how API and AJAX request works, also can be used
-to show how to build a little server with Flask, or anything you want.
+This server was built to show how API and AJAX request works, also can be used to show how to build a little server with Flask, or anything you want.
 
 
 ## How to use
@@ -33,9 +32,9 @@ to show how to build a little server with Flask, or anything you want.
     python app.py no-fake
     ```
 
-    This will bring you real data from CONIDA (Comisión Nacional de Desarrollo Investigación Aeroespacial - Peru). In this mode data is renwed every 5 minutes.
+    This will bring you real data from [CONIDA][conida] (Comisión Nacional de Desarrollo Investigación Aeroespacial - Peru). In this mode data is renwed every 5 minutes.
 
-4. Go to your web browser, enter to `127.0.0.1:5000`, and enjoy :smile:
+4. Go to your web browser, enter to [`127.0.0.1:5000`][local], and enjoy :smile:
 
 ## Authors
 
@@ -82,3 +81,8 @@ order according to laws.
 [4]: https://img.shields.io/badge/Language-HTML5-orange.svg?maxAge=2592000&style=flat-square
 [5]: https://img.shields.io/badge/Language-CSS3-blue.svg?maxAge=2592000&style=flat-square
 [6]: https://img.shields.io/badge/Language-JS-yellow.svg?maxAge=2592000&style=flat-square
+[7]: https://img.shields.io/badge/Topic-AJAX-green.svg?maxAge=2592000&style=flat-square
+[8]: https://img.shields.io/badge/Topic-API-green.svg?maxAge=2592000&style=flat-square
+[9]: https://img.shields.io/badge/Topic-Meteorology-green.svg?maxAge=2592000&style=flat-square
+[conida]: http://www.conida.gob.pe/OTROS/joomla/astro/clima.htm
+[local]: http://127.0.0.1:5000

@@ -143,7 +143,7 @@
 
             // Use a named immediately-invoked function expression.
             function worker() {
-                $.ajax('http://127.0.0.1:5000/api/')
+                $.ajax(window.location.protocol + '//' + window.location.host + '/api/')
                     .fail(function(response) {
                         // This part is used if this ajax request fails
                         // call the worker every seccond
