@@ -1,3 +1,4 @@
+<style>pre{background-color:red!important}</style>
 # Meteorological faker
 
 [![Preview](./banner.png)][1]
